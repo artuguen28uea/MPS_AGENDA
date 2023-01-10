@@ -1,0 +1,76 @@
+/*
+	@name login
+*/
+/* Only edit this if you know what you are doing! */
+body {
+	margin-top: 10%;
+	margin-bottom: 10%;
+	margin-left: auto;
+	margin-right: auto;
+	padding: 0px;
+	font-family: "Arial";
+	overflow-x: hidden;
+
+}
+
+
+img {
+	position: absolute;
+	display: block;
+	margin: 0px;
+	border: none;
+	padding: 0px;
+}
+
+input {
+	background-color: #C5C5C5;
+	font-family: "Arial";
+	padding-right: 20px;
+	padding-left: 20px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	margin: 5px;
+}
+
+h1 {
+	color: black;
+}
+
+a {
+	font-family: "Arial";
+}
+
+button {
+	background-color: black;
+	color: #FFFFFF;
+	align-items: center;
+	margin-top: 15px;
+	margin-bottom: 10px;
+	padding-right: 81px;
+	padding-left: 81px;
+	padding-top: 8px;
+	padding-bottom: 8px;
+	text-align: center;
+
+}
+
+#content-container {
+	background-color: #FFFFFF;
+	text-align: center;
+}
+
+#title {
+	display: block;
+	position: relative;
+	overflow: hidden;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	align-items: center;
+	background-color: #FFFFFF;
+}
+
+#cadastrar {
+	font-size: small;
+	color: black;
+}
