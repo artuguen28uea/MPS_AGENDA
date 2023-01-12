@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html" charset="utf-8" />
+    <title>Wellcome!</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <link rel="stylesheet" href="../static/css/home.css" />
+    <script src="{{url_for('static', filename='js/home.js')}}"></script>
+</head>
+
+<body>
+
+    <div id="user">
+        <h3>Arthur Uguen</h3>
+    </div>
+
+    <div id="title">
+        <h1>AGENDA MPS</h1>
+    </div>
+
+    <div id="content-container">
+
+        <div id="calendario">
+            <button id="calendarioButton" class="buttons">Calendário</button>
+        </div>
+
+        <div id="editar_usuario">
+            <button id="userDataButton" class="buttons">Editar Dados</button>
+        </div>
+
+        <div id="cadastrar_evento">
+            <button id="eventButton" class="buttons">Cadastrar Evento</button>
+        </div>
+    </div>
+
+    <div id="logout">
+        <button id="logoutButton" class="buttons">Logout</button>
+    </div>
+</body>
+
+</html>

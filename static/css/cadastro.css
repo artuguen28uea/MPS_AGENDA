@@ -3,7 +3,7 @@
 */
 /* Only edit this if you know what you are doing! */
 body {
-	margin-top: 10%;
+	margin-top: 30%;
 	margin-bottom: 10%;
 	margin-left: auto;
 	margin-right: auto;
@@ -29,7 +29,7 @@ input {
 	padding-left: 20px;
 	padding-top: 5px;
 	padding-bottom: 5px;
-	margin: 5px;
+	margin: 2px;
 }
 
 h1 {
@@ -46,16 +46,16 @@ button {
 	align-items: center;
 	margin-top: 15px;
 	margin-bottom: 10px;
-	padding-right: 81px;
-	padding-left: 81px;
-	padding-top: 8px;
-	padding-bottom: 8px;
+	padding-top: 6px;
+	padding-bottom: 6px;
+	padding-right: 72px;
+	padding-left: 72px;
 	text-align: center;
 
 }
 
 #content-container {
-	background-color: #FFFFFF;
+	background-color: white;
 	text-align: center;
 }
 

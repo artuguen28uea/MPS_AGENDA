@@ -1,6 +1,6 @@
 import sqlite3
 
-connection = sqlite3.connect("agenda/users.db")
+connection = sqlite3.connect("src/database.db")
 
 cursor = connection.cursor()
 
@@ -44,5 +44,6 @@ for i in range(len(events)):
   cursor.execute("insert into event (user_id, event_title, event_date, event_description, event_status) values (?, ?, ?, ?, ?)", 
             [events[i][0], events[i][1], events[i][2], events[i][3], events[i][4]])
 
+connection.commit()
 
 connection.close()
