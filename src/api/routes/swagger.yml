@@ -1,0 +1,207 @@
+openapi: 3.0.0
+info:
+  title: "MPS Flask REST API"
+  description: "Atividade de MPS"
+  version: "1.0.0"
+
+servers:
+  - url: "/api"
+
+# USER
+
+components:
+  schemas:
+    User:
+      type: "object"
+      required:
+        - user_id
+      properties:
+        user_name:
+          type: "string"
+        user_id:
+          type: "string"
+    Event:
+      type: "object"
+      required:
+        - event_id
+      properties:
+        user_id:
+          type: "string"
+        event_title:
+          type: "string"
+        event_date:
+          type: "string"
+        event_description:
+          type: "string"
+        event_status:
+          type: "string"
+        user_id:
+          type: "string"
+  parameters:
+    user_id:
+      name: "user_id"
+      description: "ID of the person to get"
+      in: path
+      required: True
+      schema:
+        type: "string"
+    event_id:
+      name: "event_id"
+      description: "ID of the event to get"
+      in: path
+      required: True
+      schema:
+        type: "string"
+
+paths:
+  # Logar -> GET
+  # Cadastrar-> GET and POST
+  /user:
+    get:
+      operationId: "src.api.routes.user.read_all"
+      tags:
+        - "User"
+      summary: "Read the list of users"
+      responses:
+        "200":
+          description: "Successfully read user list"
+    post:
+      operationId: "src.api.routes.user.create"
+      tags:
+        - "User"
+      summary: "Create a new user"
+      requestBody:
+        description: "User to create"
+        required: true
+        content:
+          application/json:
+            schema:
+              x-body-name: "user"
+              $ref: "#/components/schemas/User"
+      responses:
+        "200":
+          description: "Successfully created user"
+        
+  # Deslogar -> PUT
+  # Editar Usuário -> PUT
+  /user/{user_id}:
+    get:
+      operationId: "src.api.routes.user.read_one"
+      tags:
+        - "User"
+      summary: "Read one user"
+      parameters:
+        - $ref: "#/components/parameters/user_id"
+      responses:
+        "200":
+          description: "Successfully read user"
+
+    put:
+      tags:
+        - "User"
+      operationId: "src.api.routes.user.update"
+      summary: "Update a user"
+      parameters:
+        - $ref: "#/components/parameters/user_id"
+      responses:
+        "200":
+          description: "Successfully updated user"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              x-body-name: "user"
+              $ref: "#/components/schemas/User"
+
+    delete:
+      tags:
+        - "User"
+      operationId: "src.api.routes.user.delete"
+      summary: "Delete a user"
+      parameters:
+        - $ref: "#/components/parameters/user_id"
+      responses:
+        "204":
+          description: "Successfully deleted user"
+
+
+  # Visualizar calendário -> GET
+  # Criar evento -> POST
+  /user/{user_id}/event:
+    get:
+      operationId: "src.api.routes.event.read_all"
+      tags:
+        - "Event"
+      summary: "Read the list of events of a user"
+      parameters:
+        - $ref: "#/components/parameters/user_id"
+      responses:
+        "200":
+          description: "Successfully read event list"
+
+    post:
+      operationId: "src.api.routes.event.create"
+      tags:
+        - "Event"
+      summary: "Create a new event"
+      parameters:
+        - $ref: "#/components/parameters/user_id"
+      requestBody:
+        description: "Event to create"
+        required: true
+        content:
+          application/json:
+            schema:
+              x-body-name: "event"
+              $ref: "#/components/schemas/Event"
+      responses:
+        "200":
+          description: "Successfully created event"
+
+  # Visualizar evento -> GET
+  # Editar evento -> PUT
+
+  /user/{user_id}/event/{event_id}:
+    get:
+      operationId: "src.api.routes.event.read_one"
+      tags:
+        - "Event"
+      summary: "Read an event of a user"
+      parameters:
+        - $ref: "#/components/parameters/user_id"
+        - $ref: "#/components/parameters/event_id"
+      responses:
+        "200":
+          description: "Successfully read event"
+    put:
+      tags:
+        - "Event"
+      operationId: "src.api.routes.event.update"
+      summary: "Update an event"
+      parameters:
+        - $ref: "#/components/parameters/user_id"
+        - $ref: "#/components/parameters/event_id"
+      responses:
+        "200":
+          description: "Successfully updated event"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              x-body-name: "event"
+              $ref: "#/components/schemas/Event"
+    delete:
+      tags:
+        - "Event"
+      operationId: "src.api.routes.event.delete"
+      summary: "Delete an event"
+      parameters:
+        - $ref: "#/components/parameters/user_id"
+        - $ref: "#/components/parameters/event_id"
+      responses:
+        "204":
+          description: "Successfully deleted event"
+        
+
+
+  
