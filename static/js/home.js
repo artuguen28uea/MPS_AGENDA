@@ -3,7 +3,7 @@ document.getElementById("calendarioButton").onclick = function () {
 };
 
 document.getElementById("userDataButton").onclick = function () {
-    location.href = "http://127.0.0.1:5000/editar_usuario";
+    location.href = "http://127.0.0.1:5000/edit";
 };
 
 document.getElementById("myButton").onclick = function () {

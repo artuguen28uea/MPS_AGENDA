@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Agenda </title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
+    <link rel="stylesheet" href="{{url_for('static', filename='css/bootstrap.css')}}">
+    <link rel="stylesheet" href="../static/css/calendar.css">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/calendar.css')}}">
+</head>
+</head>
+
+<body>
+    <div class="calendar">
+        <div class="month">
+            <div class="dropdown">
+
+                <i class="fa fa-user icon" type="button" data-bs-toggle="dropdown" aria-expanded="false"></i>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href=" {{ url_for('user_data') }} ">Visualizar dados</a></li>
+                    <li><a class="dropdown-item" href=" {{url_for('edit_user')}} ">Editar dados</a></li>
+                    <li><a class="dropdown-item" href=" {{url_for('change_password')}} ">trocar senha</a></li>
+                </ul>
+            </div>
+
+            <i class="fa fa-angle-left prev"></i>
+            <div class="date">Janeiro 2023</div>
+            <i class="fa fa-angle-right next"></i>
+            <a href="/logout" style="color: FFF;"><i class="fa-solid fa-arrow-right-from-bracket icon"></i></a>
+
+        </div>
+        <div class="weekdays">
+            <div>D</div>
+            <div>S</div>
+            <div>T</div>
+            <div>Q</div>
+            <div>Q</div>
+            <div>S</div>
+            <div>S</div>
+        </div>
+        <div class="days">
+            <!-- Days are added with js-->
+        </div>
+    </div>
+
+    <button class="add-event">
+        <i class="fas fa-plus"></i>
+    </button>
+
+    <div class="modal" tabindex="-1" id="showEvents">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="showEventsTitle">Modal title</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="eventsList">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                    <button type="button" class="btn btn-info" id="btnAdd">adicionar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" tabindex="-1" id="seeEvent">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="seeEventTitle">Novo Evento</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="seeEventBody">
+                    <div class="modalForm">
+                        <p>Data: <span id="DataSeeEvent"></span></p>
+                        <p>Hora: <span id="HoraSeeEvent"></span></p>
+                        <p>descrição: <span id="descriçãoSeeEvent"></span></p>
+                        <p>notificar: <span id="notificarSeeEvent"></span></p>
+                    </div>
+                </div>
+                <form action="/delete_event" method="post" id="formDelete">
+                    <input type="hidden" name="id" id="deleteId">
+                </form>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-warning" id="btnEdit">Editar</button>
+                    <button type="button" class="btn btn-danger" id="btnApagar">Apagar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" tabindex="-1" id="addEvent">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addEventTitle">Novo Evento</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="addEventBody">
+                    <div class="modalForm">
+                        <form action="/create_event" method="post" id="formAdd">
+                            <input type="hidden" id="idAddNew" name="id">
+                            <label for="nome">nome:</label>
+                            <input type="text" name="nome" id="nomeAddNew" required><br>
+                            <label for="data">Data:</label>
+                            <input type="date" name="data" id="dataAddNew" required><br>
+                            <label for="Hora">Hora:</label>
+                            <input type="time" name="Hora" id="HoraAddNew" required><br>
+                            <label for="descricao">descrição:</label>
+                            <input type="text" name="descricao" id="descricaoAddNew" required><br>
+                            <label for="notificar">notificar:</label>
+                            <select name="notificar" id="notificarAddNew">
+                                <option value="1">sim</option>
+                                <option value="0">não</option>
+                            </select>
+                        </form>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                    <button type="button" class="btn btn-success" id="btnSubmit">Salvar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+        integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+        crossorigin="anonymous"></script>
+    <script src="{{url_for('static', filename='js/bootstrap.bundle.js')}}"></script>
+    <!-- <script src="../static/js/calendar.js"></script> -->
+    <script src="{{url_for('static', filename='js/calendario.js')}}"></script>
+</body>
+
+<script>
+    const eventsArray = {{ events| tojson | safe }};
+
+    var modalvisualizar = new bootstrap.Modal(document.getElementById("showEvents"), {
+        keyboard: true,
+        backdrop: 'static',
+        focus: true
+    });
+
+    var modalAdicionar = new bootstrap.Modal(document.getElementById("addEvent"), {
+        keyboard: true,
+        backdrop: 'static',
+        focus: true
+    });
+
+    var modalVer = new bootstrap.Modal(document.getElementById("seeEvent"), {
+        keyboard: true,
+        backdrop: 'static',
+        focus: true
+    });
+
+    initCalendar();
+
+</script>
+
+</html>
